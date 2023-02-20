@@ -3,79 +3,93 @@ package utils
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.DescribeSpec
 import io.kotest.matchers.shouldBe
-import java.lang.RuntimeException
 
 internal class StringCalculatorTest : DescribeSpec({
-
-    describe("splitAndSum 메서드는") {
-
-        context("null 이 주어지면") {
-            val givenInput = null
-            it("0을 반환한다.") {
-                // test here
-                StringAddCalculator.splitAndSum(givenInput) shouldBe 0
-            }
-        }
-
-        context("빈 문자열이 주어지면") {
-            val givenInput = ""
-            it("0을 반환한다.") {
-                // test here
-                StringAddCalculator.splitAndSum(givenInput) shouldBe 0
-            }
-        }
-
-        context("숫자 하나가 주어지면") {
-            val givenInput = "1"
-            it("그 숫자를 반환한다.") {
-                // test here
-                StringAddCalculator.splitAndSum(givenInput) shouldBe givenInput.toInt()
-            }
-        }
-
-        context("쉼표 구분자(,)로 여러 숫자를 넣으면") {
-            val givenInput = "1,2,3"
-            it("그 숫자들의 합을 반환한다.") {
-                // test here
-                StringAddCalculator.splitAndSum(givenInput) shouldBe 6
-            }
-        }
-
-        context("쉼표 구분자(,)와 콜론 구분자(:)를 둘 다 써서 여러 숫자를 넣으면") {
-            val givenInput = "1,2:3"
-            it("그 숫자들의 합을 반환한다.") {
-                // test here
-                StringAddCalculator.splitAndSum(givenInput) shouldBe 6
-            }
-        }
-
-        context("문자열 앞부분의 '//'와 \\n 사이에 커스텀 구분자를 지정하여") {
-            val givenInput = "//;\n1;2;3"
-            it("그 숫자들의 합을 반환한다.") {
-                // test here
-                StringAddCalculator.splitAndSum(givenInput) shouldBe 6
-            }
-        }
-
-        context("음수가 들어가면") {
-            val givenInput = "-1"
-            it("RuntimeException 을 발행한다.") {
-                // test here
-                shouldThrow<RuntimeException> {
-                    StringAddCalculator.splitAndSum(givenInput)
+    describe("calculate 메서드는") {
+        context("입력값이 null이거나 빈 공백 문자일 경우") {
+            it("IllegalArggumentException을 발행한다.") {
+                shouldThrow<IllegalArgumentException> {
+                    calculate("")
                 }
             }
         }
 
-        context("숫자 이외에 문자가 들어가면") {
-            val givenInput = "hello"
-            it("RuntimeException 을 발행한다.") {
-                // test here
-                shouldThrow<RuntimeException> {
-                    StringAddCalculator.splitAndSum(givenInput)
+        context("사칙연산 기호가 아닌 특수문자가 들어온 경우") {
+            it("IllegalArgumentExcpetion을 발행한다.") {
+                shouldThrow<IllegalArgumentException> {
+                    calculate("1 + 2 @ 1")
                 }
+            }
+        }
+
+        context("사칙연산 기호와 숫자 사이에 공백이 없다면") {
+            it("IllegalArgumentExcpetion을 발행한다.") {
+                shouldThrow<IllegalArgumentException> {
+                    calculate("1 + 2* 3")
+                }
+            }
+        }
+
+        context("연산 처리에 정상적인 문자열이 들어온다면") {
+            val given = "1 + 2 * 3 / 3"
+            val expect = 3
+            it("연산을 하여 반환한다.") {
+                calculate(given) shouldBe expect
             }
         }
     }
 
+    describe("plus 메서드는") {
+        context("두 인자가 주어진경우") {
+            val givenA = 10
+            val givenB = 20
+            val expect = 30
+            it("두 인자를 합한 값을 반환한다.") {
+                add(givenA, givenB) shouldBe expect
+            }
+        }
+    }
+
+    describe("minus 메서드는") {
+        context("두 인자가 주어진경우") {
+            val givenA = 10
+            val givenB = 20
+            val expect = -10
+            it("a에서 b를 뺀 값을 반환한다.") {
+                minus(givenA, givenB) shouldBe expect
+            }
+        }
+    }
+
+    describe("multiply 메서드는") {
+        context("두 인자가 주어진경우") {
+            val givenA = 10
+            val givenB = 20
+            val expect = 200
+            it("두 인자를 곱한 값을 반환한다.") {
+                multiply(givenA, givenB) shouldBe expect
+            }
+        }
+    }
+
+    describe("divide 메서드는") {
+        context("나누었을 때 정수로 나누어 떨어지지 않다면") {
+            val givenA = 10
+            val givenB = 3
+            it("IllegalArgumentExcpetion을 발행한다.") {
+                shouldThrow<IllegalArgumentException> {
+                    divide(givenA, givenB)
+                }
+            }
+        }
+
+        context("두 인자가 주어진경우") {
+            val givenA = 10
+            val givenB = 5
+            val expect = 2
+            it("a에서 b를 나눈 값을 반환한다.") {
+                divide(givenA, givenB) shouldBe expect
+            }
+        }
+    }
 })
