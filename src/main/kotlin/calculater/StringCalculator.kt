@@ -28,7 +28,7 @@ class StringCalculator(
         var result = 0
 
         for(i in 0..input.lastIndex step 2) {
-            val operator = OperatorType.toOperator(input[i])
+            val operator = OperatorType.from(input[i])
             val operand = input[i + 1].toInt()
             result = operator.calculate(result, operand)
         }

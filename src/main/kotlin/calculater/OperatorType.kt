@@ -10,7 +10,7 @@ enum class OperatorType(
     DIVIDE("/", divide);
 
     companion object {
-        fun toOperator(input: String): OperatorType {
+        fun from(input: String): OperatorType {
             val operator = OperatorType.values().filter {
                 it.operator == input
             }.takeIf {

@@ -59,12 +59,12 @@ internal class OperatorTypeTest: DescribeSpec({
         }
     }
 
-    describe("toOperator 메서드는") {
+    describe("from 메서드는") {
         context("사칙연산 기호가 아닌 특수문자가 들어온 경우") {
             val given = "&"
             it("IllegalArgumentExcpetion을 발행한다.") {
                 shouldThrow<IllegalArgumentException> {
-                    OperatorType.toOperator(given)
+                    OperatorType.from(given)
                 }
             }
         }
@@ -72,7 +72,7 @@ internal class OperatorTypeTest: DescribeSpec({
             val given = "+"
             val expect = OperatorType.PLUS
             it("해당 enum 타입을 반환한다.") {
-                OperatorType.toOperator(given) shouldBe expect
+                OperatorType.from(given) shouldBe expect
             }
         }
     }
