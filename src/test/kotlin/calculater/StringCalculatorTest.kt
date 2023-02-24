@@ -5,11 +5,11 @@ import io.kotest.core.spec.style.DescribeSpec
 import io.kotest.matchers.shouldBe
 
 internal class StringCalculatorTest : DescribeSpec({
-    describe("calculate 메서드는") {
+    describe("parse 메서드는") {
         context("입력값이 null이거나 빈 공백 문자일 경우") {
             it("IllegalArggumentException을 발행한다.") {
                 shouldThrow<IllegalArgumentException> {
-                    calculate("")
+                    eval("")
                 }
             }
         }
@@ -17,7 +17,7 @@ internal class StringCalculatorTest : DescribeSpec({
         context("사칙연산 기호가 아닌 특수문자가 들어온 경우") {
             it("IllegalArgumentExcpetion을 발행한다.") {
                 shouldThrow<IllegalArgumentException> {
-                    calculate("1 + 2 @ 1")
+                    eval("1 + 2 @ 1")
                 }
             }
         }
@@ -25,7 +25,7 @@ internal class StringCalculatorTest : DescribeSpec({
         context("사칙연산 기호와 숫자 사이에 공백이 없다면") {
             it("IllegalArgumentExcpetion을 발행한다.") {
                 shouldThrow<IllegalArgumentException> {
-                    calculate("1 + 2* 3")
+                    eval("1 + 2* 3")
                 }
             }
         }
@@ -34,7 +34,7 @@ internal class StringCalculatorTest : DescribeSpec({
             val given = "1 + 2 * 3 / 3"
             val expect = 3
             it("연산을 하여 반환한다.") {
-                calculate(given) shouldBe expect
+                eval(given) shouldBe expect
             }
         }
     }
