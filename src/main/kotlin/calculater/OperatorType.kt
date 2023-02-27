@@ -13,7 +13,7 @@ enum class OperatorType(
         fun from(input: String): OperatorType {
             return OperatorType.values().find {
                 it.operator == input
-            } ?: throw IllegalArgumentException()
+            } ?: throw IllegalArgumentException("지원하지 않는 기호 : $input")
         }
 
         fun isConvertible(input: String): Boolean {
