@@ -28,8 +28,10 @@ class StringCalculator(
         var result = 0
 
         for(i in 0..input.lastIndex step 2) {
-            val operator = OperatorType.from(input[i])
-            val operand = input[i + 1].toInt()
+            val (rawOperator, rawOperand) = Pair(input[i], input[i + 1])
+
+            val operator = OperatorType.from(rawOperator)
+            val operand = rawOperand.toInt()
             result = operator.calculate(result, operand)
         }
 
