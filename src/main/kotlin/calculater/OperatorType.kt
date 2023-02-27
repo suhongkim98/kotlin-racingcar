@@ -11,11 +11,9 @@ enum class OperatorType(
 
     companion object {
         fun from(input: String): OperatorType {
-            val operator = OperatorType.values().filter {
+            var operator = OperatorType.values().find {
                 it.operator == input
-            }.takeIf {
-                it.isNotEmpty()
-            }?.get(0)
+            }
 
             return operator ?: throw IllegalArgumentException()
         }
