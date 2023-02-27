@@ -11,11 +11,9 @@ enum class OperatorType(
 
     companion object {
         fun from(input: String): OperatorType {
-            var operator = OperatorType.values().find {
+            return OperatorType.values().find {
                 it.operator == input
-            }
-
-            return operator ?: throw IllegalArgumentException()
+            } ?: throw IllegalArgumentException()
         }
 
         fun isConvertible(input: String): Boolean {
