@@ -16,11 +16,8 @@ enum class OperatorType(
             } ?: throw IllegalArgumentException("지원하지 않는 기호 : $input")
         }
 
-        fun isConvertible(input: String): Boolean {
-            println(input)
-            return OperatorType.values().any {
+        fun isConvertible(input: String): Boolean = OperatorType.values().any {
                 it.operator == input
-            }
         }
     }
 }

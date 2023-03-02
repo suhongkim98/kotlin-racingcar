@@ -29,16 +29,23 @@ internal class StringCalculatorTest : DescribeSpec({
                 }
             }
         }
+
+        context("정상적인 입력값이 들어온다면") {
+            val given = "1 + 2 * 3"
+
+            it("객체 자신을 불러온다.") {
+                stringCalculator.prepare(given) shouldBe stringCalculator
+            }
+        }
     }
 
     describe("calculate 메서드는") {
         context("연산 처리에 정상적인 문자열이 들어온다면") {
             val given = "1 + 2 * 3 / 3"
             val expect = 3
-            stringCalculator.prepare(given)
 
             it("연산을 하여 반환한다.") {
-                stringCalculator.calculate() shouldBe expect
+                stringCalculator.prepare(given).calculate() shouldBe expect
             }
         }
     }

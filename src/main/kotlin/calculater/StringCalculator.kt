@@ -7,7 +7,7 @@ class StringCalculator(
 ) {
     private var input: MutableList<String> = mutableListOf()
 
-    fun prepare(input: String) {
+    fun prepare(input: String): StringCalculator {
         val list: MutableList<String> = split(input)
 
         val validation = validators.all {
@@ -17,6 +17,8 @@ class StringCalculator(
 
         list.add(0, "+")
         this.input = list
+
+        return this
     }
 
     private fun split(input: String) = input.split(" ")
