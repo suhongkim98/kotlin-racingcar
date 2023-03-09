@@ -1,8 +1,9 @@
-package racingcar
+package racingcar.model
 
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.DescribeSpec
 import io.kotest.matchers.shouldBe
+import racingcar.model.RacingGame
 
 internal class RacingGameTest: DescribeSpec({
     describe("생성자는") {

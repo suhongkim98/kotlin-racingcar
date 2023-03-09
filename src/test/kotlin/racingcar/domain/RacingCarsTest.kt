@@ -3,7 +3,6 @@ package racingcar.domain
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.DescribeSpec
 import io.kotest.matchers.shouldBe
-import racingcar.RacingGame
 
 internal class RacingCarsTest: DescribeSpec({
     describe("생성자는") {
