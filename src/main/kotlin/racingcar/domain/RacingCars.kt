@@ -1,15 +1,14 @@
 package racingcar.domain
 
 import racingcar.dto.RoundResult
-import java.util.*
+import racingcar.strategy.RandomStrategy
 
 class RacingCars(private val gambleThreshold: Int,
-                 private val randomMaxValue: Int,
+                 private val randomStrategy: RandomStrategy,
                  private val cars: List<Car>) {
 
     init {
-        if(randomMaxValue <= 0) throw IllegalArgumentException("random 값 최대치는 0이하일 수 없습니다.")
-        if(gambleThreshold > randomMaxValue) throw IllegalArgumentException("차가 전진하는 가중치는 random 값 최대치보다 클 수 없습니다.")
+        if(gambleThreshold > randomStrategy.max) throw IllegalArgumentException("차가 전진하는 가중치는 random 값 최대치보다 클 수 없습니다.")
     }
 
     fun playRound(): RoundResult {
@@ -22,5 +21,5 @@ class RacingCars(private val gambleThreshold: Int,
     }
 
     private fun isMovable(randomValue: Int): Boolean = randomValue >= gambleThreshold
-    private fun gambling(): Int = Random().nextInt(randomMaxValue)
+    private fun gambling(): Int = randomStrategy.getRandomValue()
 }

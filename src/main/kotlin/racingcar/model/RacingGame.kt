@@ -3,12 +3,13 @@ package racingcar.model
 import racingcar.domain.Car
 import racingcar.domain.RacingCars
 import racingcar.dto.RoundResult
+import racingcar.strategy.RandomStrategy
 
 class RacingGame(
+    randomStrategy: RandomStrategy,
     private val round: Int,
     carCount: Int,
-    gambleThreshold: Int,
-    randomMaxValue: Int) {
+    gambleThreshold: Int) {
 
     private val racingCars: RacingCars
 
@@ -21,7 +22,7 @@ class RacingGame(
             cars.add(Car())
         }
 
-        racingCars = RacingCars(gambleThreshold, randomMaxValue, cars)
+        racingCars = RacingCars(gambleThreshold, randomStrategy, cars)
     }
 
     fun start(): List<RoundResult> {
