@@ -14,15 +14,11 @@ class RacingGame(
     private val racingCars: RacingCars
 
     init {
-        if(carCount <= 0) throw IllegalArgumentException("레이싱을 진행하는 자동차의 개수는 0이하일 수 없습니다.")
-
-        val cars: MutableList<Car> = mutableListOf()
-
-        for (i in 0 until carCount) {
-            cars.add(Car())
+        if(carCount <= 0) {
+            throw IllegalArgumentException("레이싱을 진행하는 자동차의 개수는 0이하일 수 없습니다.")
         }
 
-        racingCars = RacingCars(gambleThreshold, randomStrategy, cars)
+        racingCars = RacingCars.create(gambleThreshold, randomStrategy, carCount)
     }
 
     fun start(): List<RoundResult> {
