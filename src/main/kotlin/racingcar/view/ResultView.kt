@@ -13,19 +13,15 @@ class ResultView {
         }
 
         private fun printRoundResult(roundResult: RoundResult) {
-            val moves = roundResult.moves
-
-            for(move in moves) {
-                draw(move)
+            roundResult.moves.forEach {
+                draw(it)
             }
+
             println()
         }
 
         private fun draw(move: Int) {
-            for (i in 0 until move) {
-                print("-")
-            }
-            println()
+            println("-".repeat(move))
         }
     }
 }
