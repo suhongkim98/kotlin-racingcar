@@ -3,7 +3,7 @@ package racingcar.domain
 import racingcar.dto.RoundResult
 import racingcar.strategy.RandomStrategy
 
-class RacingCars(private val gambleThreshold: Int,
+class RacingCars private constructor (private val gambleThreshold: Int,
                  private val randomStrategy: RandomStrategy,
                  private val cars: List<Car>) {
 
