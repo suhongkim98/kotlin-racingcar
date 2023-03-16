@@ -1,19 +1,15 @@
 package racingcar.domain
 
 import racingcar.dto.RoundResult
-import racingcar.strategy.RandomStrategy
+import racingcar.strategy.MovingCriteria
 
-class RacingCars private constructor (private val gambleThreshold: Int,
-                 private val randomStrategy: RandomStrategy,
-                 private val cars: List<Car>) {
-
-    init {
-        if(gambleThreshold > randomStrategy.max) throw IllegalArgumentException("차가 전진하는 가중치는 random 값 최대치보다 클 수 없습니다.")
-    }
+class RacingCars private constructor (
+    private val movingCriteria: MovingCriteria,
+    private val cars: List<Car>
+) {
 
     companion object Factory {
-        fun create(gambleThreshold: Int,
-                   randomStrategy: RandomStrategy,
+        fun create(movingCriteria: MovingCriteria,
                    length: Int): RacingCars {
             val cars: MutableList<Car> = mutableListOf()
 
@@ -21,19 +17,15 @@ class RacingCars private constructor (private val gambleThreshold: Int,
                 cars.add(Car())
             }
 
-            return RacingCars(gambleThreshold, randomStrategy, cars)
+            return RacingCars(movingCriteria, cars)
         }
     }
 
     fun playRound(): RoundResult {
         cars.forEach {
-            val random = gambling()
-            if(isMovable(random)) it.moveForward()
+            if(movingCriteria.isMovable()) it.moveForward()
         }
 
         return RoundResult(cars.map { it.weight }.toList())
     }
-
-    private fun isMovable(randomValue: Int): Boolean = randomValue >= gambleThreshold
-    private fun gambling(): Int = randomStrategy.getRandomValue()
 }

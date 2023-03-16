@@ -1,15 +1,14 @@
 package racingcar.model
 
-import racingcar.domain.Car
 import racingcar.domain.RacingCars
 import racingcar.dto.RoundResult
-import racingcar.strategy.RandomStrategy
+import racingcar.strategy.MovingCriteria
 
 class RacingGame(
-    randomStrategy: RandomStrategy,
-    private val round: Int,
-    carCount: Int,
-    gambleThreshold: Int) {
+    movingCriteria: MovingCriteria,
+    private val roundCount: Int,
+    carCount: Int
+) {
 
     private val racingCars: RacingCars
 
@@ -18,13 +17,13 @@ class RacingGame(
             throw IllegalArgumentException("레이싱을 진행하는 자동차의 개수는 0이하일 수 없습니다.")
         }
 
-        racingCars = RacingCars.create(gambleThreshold, randomStrategy, carCount)
+        racingCars = RacingCars.create(movingCriteria, carCount)
     }
 
     fun start(): List<RoundResult> {
         val result = mutableListOf<RoundResult>()
 
-        for (i in 0 until round) {
+        for (i in 0 until roundCount) {
             val roundResult: RoundResult = racingCars.playRound()
 
             result.add(roundResult)

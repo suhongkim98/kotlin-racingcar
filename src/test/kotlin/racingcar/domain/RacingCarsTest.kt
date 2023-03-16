@@ -5,30 +5,14 @@ import io.kotest.core.spec.style.DescribeSpec
 import io.kotest.matchers.shouldBe
 import io.mockk.every
 import io.mockk.mockk
-import racingcar.strategy.DefaultRandomStrategy
+import racingcar.strategy.RandomMovingCriteria
 
 internal class RacingCarsTest: DescribeSpec({
-    val givenRandomMaxValue = 9
-
-    describe("생성자는") {
-        context("가중치가 randomMaxValue보다 크다면") {
-            val givenGambleThreshold = 10
-            val givenRandomStrategy = DefaultRandomStrategy(givenRandomMaxValue)
-
-            it("IllegalArgumentException을 던진다.") {
-                shouldThrow<IllegalArgumentException> {
-                    RacingCars(givenGambleThreshold, givenRandomStrategy, listOf(Car()))
-                }
-            }
-        }
-    }
-
     describe("playRound 메서드는") {
         context("정상적으로 호출이 되었다면") {
             val givenThreshold = 4
-            val givenRandomStrategy = DefaultRandomStrategy(givenRandomMaxValue)
-            val givenCars = listOf(Car(), Car(), Car(), Car(), Car())
-            val racingCars = RacingCars(givenThreshold, givenRandomStrategy, givenCars)
+            val givenMovingStrategy = RandomMovingCriteria(max = 9, gambleThreshold = givenThreshold)
+            val racingCars = RacingCars.create(givenMovingStrategy, 5)
 
             val expectSize = 5
             it("해당 라운드의 결과를 반환한다.") {
@@ -38,17 +22,13 @@ internal class RacingCarsTest: DescribeSpec({
             }
         }
 
-        context("차를 전진시키기 위해 랜덤값을 불러왔을 때 설정한 임계치보다 크다면") {
-            val givenThreshold = 4
-            val givenCars = listOf(Car(), Car(), Car(), Car(), Car())
-            val givenRandomStrategy = mockk<DefaultRandomStrategy>()
-            val expectRandomValue = 5
+        context("차를 전진시키기 위한 조건에 만족한다면") {
+            val givenMovingStrategy = mockk<RandomMovingCriteria>()
             val expectCarMoveValue = 2
 
-            every { givenRandomStrategy.max } returns givenRandomMaxValue
-            every { givenRandomStrategy.getRandomValue() } returns expectRandomValue
+            every { givenMovingStrategy.isMovable() } returns true
 
-            val racingCars = RacingCars(givenThreshold, givenRandomStrategy, givenCars)
+            val racingCars = RacingCars.create(givenMovingStrategy, 5)
 
             it("해당 Car를 전진시킨다.") {
                 val roundResult = racingCars.playRound()
@@ -59,17 +39,13 @@ internal class RacingCarsTest: DescribeSpec({
             }
         }
 
-        context("차를 전진시키기 위해 랜덤값을 불러왔을 때 설정한 임계치보다 작다면") {
-            val givenThreshold = 4
-            val givenCars = listOf(Car(), Car(), Car(), Car(), Car())
-            val givenRandomStrategy = mockk<DefaultRandomStrategy>()
-            val expectRandomValue = 3
+        context("차를 전진시키기 위한 조건에 만족하지 않는다면") {
+            val givenMovingStrategy = mockk<RandomMovingCriteria>()
             val expectCarMoveValue = 1
 
-            every { givenRandomStrategy.max } returns givenRandomMaxValue
-            every { givenRandomStrategy.getRandomValue() } returns expectRandomValue
+            every { givenMovingStrategy.isMovable() } returns false
 
-            val racingCars = RacingCars(givenThreshold, givenRandomStrategy, givenCars)
+            val racingCars = RacingCars.create(givenMovingStrategy, 5)
 
             it("해당 Car는 전진하지 않는다.") {
                 val roundResult = racingCars.playRound()
