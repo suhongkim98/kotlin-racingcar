@@ -1,7 +1,7 @@
 package racingcar.strategy
 
 import racingcar.domain.Car
-import java.util.*
+import java.security.SecureRandom
 
 class RandomMovingCriteria(
     private val max: Int,
@@ -14,7 +14,7 @@ class RandomMovingCriteria(
     }
 
     override fun isMovable(car: Car): Boolean {
-        val random = Random().nextInt(max)
+        val random = SecureRandom().nextInt(max)
         return random >= gambleThreshold
     }
 }
