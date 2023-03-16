@@ -26,7 +26,7 @@ internal class RacingCarsTest: DescribeSpec({
             val givenMovingStrategy = mockk<RandomMovingCriteria>()
             val expectCarMoveValue = 2
 
-            every { givenMovingStrategy.isMovable() } returns true
+            every { givenMovingStrategy.isMovable(any()) } returns true
 
             val racingCars = RacingCars.create(givenMovingStrategy, 5)
 
@@ -43,7 +43,7 @@ internal class RacingCarsTest: DescribeSpec({
             val givenMovingStrategy = mockk<RandomMovingCriteria>()
             val expectCarMoveValue = 1
 
-            every { givenMovingStrategy.isMovable() } returns false
+            every { givenMovingStrategy.isMovable(any()) } returns false
 
             val racingCars = RacingCars.create(givenMovingStrategy, 5)
 

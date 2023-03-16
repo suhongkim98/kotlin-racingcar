@@ -1,5 +1,7 @@
 package racingcar.strategy
 
+import racingcar.domain.Car
+
 interface MovingCriteria {
-    fun isMovable(): Boolean
+    fun isMovable(car: Car): Boolean
 }

@@ -1,5 +1,6 @@
 package racingcar.strategy
 
+import racingcar.domain.Car
 import java.util.*
 
 class RandomMovingCriteria(
@@ -12,7 +13,7 @@ class RandomMovingCriteria(
         if(gambleThreshold > max) throw IllegalArgumentException("차가 전진하는 가중치는 random 값 최대치보다 클 수 없습니다.")
     }
 
-    override fun isMovable(): Boolean {
+    override fun isMovable(car: Car): Boolean {
         val random = Random().nextInt(max)
         return random >= gambleThreshold
     }

@@ -10,10 +10,16 @@ class RacingCars private constructor (
 
     fun playRound(): RoundResult {
         cars.forEach {
-            if(movingCriteria.isMovable()) it.moveForward()
+            moveRacingCar(it)
         }
 
         return RoundResult(cars.map { it.weight }.toList())
+    }
+
+    private fun moveRacingCar(car: Car) {
+        if(movingCriteria.isMovable(car)) {
+            car.moveForward()
+        }
     }
 
     companion object Factory {
