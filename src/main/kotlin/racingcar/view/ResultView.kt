@@ -2,28 +2,26 @@ package racingcar.view
 
 import racingcar.dto.RoundResult
 
-class ResultView {
+object ResultView {
 
 
-    companion object {
-        fun printRacingGameResult(result: List<RoundResult>) {
-            println("실행 결과")
+    fun printRacingGameResult(result: List<RoundResult>) {
+        println("실행 결과")
 
-            result.map {
-                printRoundResult(it)
-            }
+        result.map {
+            printRoundResult(it)
+        }
+    }
+
+    private fun printRoundResult(roundResult: RoundResult) {
+        roundResult.moves.forEach {
+            draw(it)
         }
 
-        private fun printRoundResult(roundResult: RoundResult) {
-            roundResult.moves.forEach {
-                draw(it)
-            }
+        println()
+    }
 
-            println()
-        }
-
-        private fun draw(move: Int) {
-            println("-".repeat(move))
-        }
+    private fun draw(move: Int) {
+        println("-".repeat(move))
     }
 }

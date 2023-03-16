@@ -1,6 +1,6 @@
 package calculater
 
-class StringAddCalculator {
+class StringAddCalculator private constructor() {
     companion object {
         private const val CUSTOM_SEPARATOR_PATTERN = "//(.)\n(.*)"
         private val DEFAULT_DELIMITERS = arrayOf(",", ":")
