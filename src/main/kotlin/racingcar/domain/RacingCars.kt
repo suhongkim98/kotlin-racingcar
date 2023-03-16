@@ -8,6 +8,14 @@ class RacingCars private constructor (
     private val cars: List<Car>
 ) {
 
+    fun playRound(): RoundResult {
+        cars.forEach {
+            if(movingCriteria.isMovable()) it.moveForward()
+        }
+
+        return RoundResult(cars.map { it.weight }.toList())
+    }
+
     companion object Factory {
         fun create(movingCriteria: MovingCriteria,
                    length: Int): RacingCars {
@@ -19,13 +27,5 @@ class RacingCars private constructor (
 
             return RacingCars(movingCriteria, cars)
         }
-    }
-
-    fun playRound(): RoundResult {
-        cars.forEach {
-            if(movingCriteria.isMovable()) it.moveForward()
-        }
-
-        return RoundResult(cars.map { it.weight }.toList())
     }
 }

@@ -3,6 +3,8 @@ package racingcar.view
 import racingcar.dto.RoundResult
 
 class ResultView {
+
+
     companion object {
         fun printRacingGameResult(result: List<RoundResult>) {
             println("실행 결과")
