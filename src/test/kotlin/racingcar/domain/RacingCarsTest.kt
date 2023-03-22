@@ -18,7 +18,7 @@ internal class RacingCarsTest: DescribeSpec({
             it("해당 라운드의 결과를 반환한다.") {
                 val round = racingCars.playRound()
 
-                round.moves.size shouldBe expectSize
+                round.carStatuses.size shouldBe expectSize
             }
         }
 
@@ -33,8 +33,8 @@ internal class RacingCarsTest: DescribeSpec({
             it("해당 Car를 전진시킨다.") {
                 val roundResult = racingCars.playRound()
 
-                roundResult.moves.forEach {
-                    it shouldBe expectCarMoveValue
+                roundResult.carStatuses.forEach {
+                    it.weight shouldBe expectCarMoveValue
                 }
             }
         }
@@ -50,8 +50,8 @@ internal class RacingCarsTest: DescribeSpec({
             it("해당 Car는 전진하지 않는다.") {
                 val roundResult = racingCars.playRound()
 
-                roundResult.moves.forEach {
-                    it shouldBe expectCarMoveValue
+                roundResult.carStatuses.forEach {
+                    it.weight shouldBe expectCarMoveValue
                 }
             }
         }

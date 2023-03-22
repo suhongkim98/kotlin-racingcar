@@ -1,11 +1,12 @@
 package racingcar.view
 
-import racingcar.dto.RoundResult
+import racingcar.dto.CarStatusDto
+import racingcar.dto.RoundResultDto
 
 object ResultView {
 
 
-    fun printRacingGameResult(result: List<RoundResult>) {
+    fun printRacingGameResult(result: List<RoundResultDto>) {
         println("실행 결과")
 
         result.map {
@@ -13,15 +14,15 @@ object ResultView {
         }
     }
 
-    private fun printRoundResult(roundResult: RoundResult) {
-        roundResult.moves.forEach {
+    private fun printRoundResult(roundResult: RoundResultDto) {
+        roundResult.carStatuses.forEach {
             draw(it)
         }
 
         println()
     }
 
-    private fun draw(move: Int) {
-        println("-".repeat(move))
+    private fun draw(carStatus: CarStatusDto) {
+        println(carStatus.name + " : " + "-".repeat(carStatus.weight))
     }
 }

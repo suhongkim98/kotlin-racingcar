@@ -1,6 +1,7 @@
 package racingcar.domain
 
-import racingcar.dto.RoundResult
+import racingcar.dto.CarStatusDto
+import racingcar.dto.RoundResultDto
 import racingcar.strategy.MovingCriteria
 
 class RacingCars private constructor (
@@ -8,12 +9,14 @@ class RacingCars private constructor (
     private val cars: List<Car>
 ) {
 
-    fun playRound(): RoundResult {
+    fun playRound(): RoundResultDto {
         cars.forEach {
             moveRacingCar(it)
         }
 
-        return RoundResult(cars.map { it.weight }.toList())
+        return RoundResultDto(cars.map {
+            CarStatusDto(it.name, it.weight)
+        })
     }
 
     private fun moveRacingCar(car: Car) {
