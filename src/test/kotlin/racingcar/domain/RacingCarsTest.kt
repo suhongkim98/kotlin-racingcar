@@ -12,7 +12,7 @@ internal class RacingCarsTest: DescribeSpec({
         context("정상적으로 호출이 되었다면") {
             val givenThreshold = 4
             val givenMovingStrategy = RandomMovingCriteria(max = 9, gambleThreshold = givenThreshold)
-            val racingCars = RacingCars.create(givenMovingStrategy, 5)
+            val racingCars = RacingCars.create(givenMovingStrategy, listOf("a","b","c","d","e"))
 
             val expectSize = 5
             it("해당 라운드의 결과를 반환한다.") {
@@ -28,7 +28,7 @@ internal class RacingCarsTest: DescribeSpec({
 
             every { givenMovingStrategy.isMovable(any()) } returns true
 
-            val racingCars = RacingCars.create(givenMovingStrategy, 5)
+            val racingCars = RacingCars.create(givenMovingStrategy, listOf("a","b","c","d","e"))
 
             it("해당 Car를 전진시킨다.") {
                 val roundResult = racingCars.playRound()
@@ -45,7 +45,7 @@ internal class RacingCarsTest: DescribeSpec({
 
             every { givenMovingStrategy.isMovable(any()) } returns false
 
-            val racingCars = RacingCars.create(givenMovingStrategy, 5)
+            val racingCars = RacingCars.create(givenMovingStrategy, listOf("a","b","c","d","e"))
 
             it("해당 Car는 전진하지 않는다.") {
                 val roundResult = racingCars.playRound()

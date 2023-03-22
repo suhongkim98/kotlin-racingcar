@@ -7,13 +7,13 @@ import racingcar.view.ResultView
 
 
 fun main() {
-    val carCount = InputView.getCarCount()
+    val carNames = InputView.getCarNames()
     val roundCount = InputView.getRoundCount()
 
     val result = RacingGame(
         movingCriteria = RandomMovingCriteria(max = 9, gambleThreshold = 4),
         roundCount = roundCount,
-        carCount = carCount).start()
+        carNames = carNames).start()
 
     ResultView.printRacingGameResult(result)
 }

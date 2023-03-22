@@ -24,11 +24,11 @@ class RacingCars private constructor (
 
     companion object Factory {
         fun create(movingCriteria: MovingCriteria,
-                   length: Int): RacingCars {
+                   names: List<String>): RacingCars {
             val cars: MutableList<Car> = mutableListOf()
 
-            for (i in 0 until length) {
-                cars.add(Car())
+            for (name in names) {
+                cars.add(Car(name))
             }
 
             return RacingCars(movingCriteria, cars)
