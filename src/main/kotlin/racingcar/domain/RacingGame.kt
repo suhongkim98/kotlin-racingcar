@@ -27,10 +27,7 @@ class RacingGame(
             roundResults.add(roundResult)
         }
 
-        val winners = roundResults.last().findWinners()
-
         return GameResult(
-            winners = winners,
             roundResults = roundResults
         )
     }

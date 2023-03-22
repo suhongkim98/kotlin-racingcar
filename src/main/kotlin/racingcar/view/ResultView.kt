@@ -9,11 +9,11 @@ object ResultView {
     fun printRacingGameResult(result: GameResult) {
         println("실행 결과")
 
-        result.roundResults.map {
+        result.roundResults.forEach {
             printRoundResult(it)
         }
 
-        printWinners(result.winners)
+        printWinners(result.findWinners())
     }
 
     private fun printRoundResult(roundResult: RoundResult) {
@@ -31,7 +31,9 @@ object ResultView {
     private fun printWinners(winners: List<CarStatus>) {
         if (winners.isEmpty()) return
 
-        val names = winners.joinToString(", ") { it.name }
+        val names = winners.joinToString(", ") {
+            it.name
+        }
         println("${names}가 최종 우승했습니다.")
     }
 }
