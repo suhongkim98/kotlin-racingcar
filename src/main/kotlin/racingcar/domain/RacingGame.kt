@@ -1,7 +1,5 @@
-package racingcar.model
+package racingcar.domain
 
-import racingcar.domain.RacingCars
-import racingcar.dto.RoundResultDto
 import racingcar.strategy.MovingCriteria
 
 class RacingGame(
@@ -20,15 +18,20 @@ class RacingGame(
         racingCars = RacingCars.create(movingCriteria, carNames)
     }
 
-    fun start(): List<RoundResultDto> {
-        val result = mutableListOf<RoundResultDto>()
+    fun start(): GameResult {
+        val roundResults = mutableListOf<RoundResult>()
 
         for (i in 0 until roundCount) {
-            val roundResult: RoundResultDto = racingCars.playRound()
+            val roundResult: RoundResult = racingCars.playRound()
 
-            result.add(roundResult)
+            roundResults.add(roundResult)
         }
 
-        return result
+        val winners = roundResults.last().findWinners()
+
+        return GameResult(
+            winners = winners,
+            roundResults = roundResults
+        )
     }
 }

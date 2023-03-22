@@ -1,8 +1,9 @@
-package racingcar.model
+package racingcar.domain
 
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.DescribeSpec
 import io.kotest.matchers.shouldBe
+import racingcar.domain.RacingGame
 import racingcar.strategy.RandomMovingCriteria
 
 internal class RacingGameTest: DescribeSpec({
@@ -37,7 +38,7 @@ internal class RacingGameTest: DescribeSpec({
                 it("모든 라운드에 대한 결과를 반환한다.") {
                     val roundResults = racingGame.start()
 
-                    roundResults.size shouldBe givenRound
+                    roundResults.roundResults.size shouldBe givenRound
                 }
             }
         }
