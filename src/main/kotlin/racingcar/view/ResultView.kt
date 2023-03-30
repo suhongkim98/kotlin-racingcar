@@ -1,6 +1,6 @@
 package racingcar.view
 
-import racingcar.domain.CarStatus
+import racingcar.domain.RacingRecord
 import racingcar.domain.GameResult
 import racingcar.domain.RoundResult
 
@@ -17,18 +17,18 @@ object ResultView {
     }
 
     private fun printRoundResult(roundResult: RoundResult) {
-        roundResult.carStatuses.forEach {
+        roundResult.racingRecords.forEach {
             draw(it)
         }
 
         println()
     }
 
-    private fun draw(carStatus: CarStatus) {
-        println(carStatus.name + " : " + "-".repeat(carStatus.weight))
+    private fun draw(racingRecord: RacingRecord) {
+        println(racingRecord.name + " : " + "-".repeat(racingRecord.weight))
     }
 
-    private fun printWinners(winners: List<CarStatus>) {
+    private fun printWinners(winners: List<RacingRecord>) {
         if (winners.isEmpty()) return
 
         val names = winners.joinToString(", ") {

@@ -1,6 +1,6 @@
 package racingcar.domain
 
-class CarStatus(
+class RacingRecord(
     val name: String,
     val weight: Int,
 )

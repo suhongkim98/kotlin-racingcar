@@ -2,14 +2,14 @@ package racingcar.domain
 
 
 class RoundResult(
-    val carStatuses: List<CarStatus>
+    val racingRecords: List<RacingRecord>
 ) {
-    fun findWinners(): List<CarStatus> {
-        val winner = carStatuses.maxByOrNull {
+    fun findWinners(): List<RacingRecord> {
+        val winner = racingRecords.maxByOrNull {
             it.weight
         } ?: return listOf()
 
-        return carStatuses.filter {
+        return racingRecords.filter {
             it.weight == winner.weight
         }
     }

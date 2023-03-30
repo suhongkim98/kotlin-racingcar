@@ -7,10 +7,10 @@ class GameResultTest : DescribeSpec({
     describe("findWinners 메서드는") {
         context("라운드들에 대한 결과가 주어진다면") {
             val givenFirstRoundResult = RoundResult(listOf(
-                CarStatus("a", 10),CarStatus("b", 20),
+                RacingRecord("a", 10),RacingRecord("b", 20),
             ))
             val givenLastRoundResult = RoundResult(listOf(
-                CarStatus("a", 20),CarStatus("b", 30),
+                RacingRecord("a", 20),RacingRecord("b", 30),
             ))
             val gameResult = GameResult(listOf(givenFirstRoundResult, givenLastRoundResult))
 

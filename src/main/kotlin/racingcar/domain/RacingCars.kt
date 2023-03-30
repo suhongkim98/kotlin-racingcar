@@ -13,7 +13,7 @@ class RacingCars private constructor (
         }
 
         return RoundResult(cars.map {
-            CarStatus(it.name, it.weight)
+            RacingRecord(it.name, it.weight)
         })
     }
 

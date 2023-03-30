@@ -1,6 +1,5 @@
 package racingcar.domain
 
-import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.DescribeSpec
 import io.kotest.matchers.shouldBe
 import io.mockk.every
@@ -18,7 +17,7 @@ internal class RacingCarsTest: DescribeSpec({
             it("해당 라운드의 결과를 반환한다.") {
                 val round = racingCars.playRound()
 
-                round.carStatuses.size shouldBe expectSize
+                round.racingRecords.size shouldBe expectSize
             }
         }
 
@@ -33,7 +32,7 @@ internal class RacingCarsTest: DescribeSpec({
             it("해당 Car를 전진시킨다.") {
                 val roundResult = racingCars.playRound()
 
-                roundResult.carStatuses.forEach {
+                roundResult.racingRecords.forEach {
                     it.weight shouldBe expectCarMoveValue
                 }
             }
@@ -50,7 +49,7 @@ internal class RacingCarsTest: DescribeSpec({
             it("해당 Car는 전진하지 않는다.") {
                 val roundResult = racingCars.playRound()
 
-                roundResult.carStatuses.forEach {
+                roundResult.racingRecords.forEach {
                     it.weight shouldBe expectCarMoveValue
                 }
             }
